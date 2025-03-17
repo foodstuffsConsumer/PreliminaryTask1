@@ -11,20 +11,20 @@ def main():
         print('view - Displays your personal spellbook.')
         print('remove - Removes a spell from your spellbook.')
         print('')
-        rawcommand = input("Input a command: ")
+        rawchoice = input("Input a command: ")
 
-        command = rawcommand.lower()
+        choice = rawchoice.lower()
 
-        if command == 'search':
+        if choice == 'search':
             print("doesn't work yet")
             print('')
-        elif command == 'add':
+        elif choice == 'add':
             print("not yet buddy pal")
             print('')
-        elif command == 'view':
+        elif choice == 'view':
             print("under construction")
             print('')
-        elif command == 'remove':
+        elif choice == 'remove':
             print("give time where time is due") 
             # did you know? the printed statement above is a reference. if you know what it is, you're based. based on what? idk man
             print('')
