@@ -1,5 +1,28 @@
 import time
 
+spellbook = {}
+
+def searcher():
+    print("doesn't work yet")
+    print('')
+
+def adder():
+    print("not yet buddy pal")
+    print('')
+
+def viewer():
+    print("under construction")
+    print('')
+
+def remover():
+    print("give time where time is due") 
+    # did you know? the printed statement above is a reference. if you know what it is, you're based. based on what? idk man
+    print('')
+
+def invalid():
+    print("dude this wouldn't be valid even if the program worked")
+    print('')
+
 def main():
     while True:
         print('======================')
@@ -16,20 +39,14 @@ def main():
         choice = rawchoice.lower()
 
         if choice == 'search':
-            print("doesn't work yet")
-            print('')
+            searcher()
         elif choice == 'add':
-            print("not yet buddy pal")
-            print('')
+            adder()
         elif choice == 'view':
-            print("under construction")
-            print('')
+            viewer()
         elif choice == 'remove':
-            print("give time where time is due") 
-            # did you know? the printed statement above is a reference. if you know what it is, you're based. based on what? idk man
-            print('')
+            remover()
         else:
-            print("dude this wouldn't be valid even if the program worked")
-            print('')
+           invalid()
         
         time.sleep(1.5)
