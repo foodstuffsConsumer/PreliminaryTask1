@@ -12,9 +12,9 @@ def searcher(searchedspell):
     if response.status_code == 200:
         spell_data = response.json()
         print("\n[NAME] - " + spell_data["name"])
-        print("[DESCRIPTION] - " + spell_data["desc"][0])
         print("[LEVEL] - " + str(spell_data["level"]))
-
+        print("[DESCRIPTION] - " + spell_data["desc"][0])
+        
         time.sleep(1.5)
 
         backtomenu = input('\nInput anything when you would like to return to the Command Menu. ')
@@ -42,10 +42,15 @@ def finder(spelltofind):
 
 def adder(addedspell):
     trueaddedspell = addedspell.title()
-    if trueaddedspell:
-        spellbook[trueaddedspell] = trueaddedspell
-        print(f"Added {trueaddedspell} to your spellbook!")
-        time.sleep(1.5)
+    spell = finder(trueaddedspell)
+    if spell:
+        if trueaddedspell not in spellbook:
+            spellbook[trueaddedspell] = spell
+            print(f"Added {trueaddedspell} to your spellbook!")
+            time.sleep(1.5)
+        else:
+            print("You already have this spell!")
+            time.sleep(1.5)
 
 def viewer():
     if not spellbook:
@@ -54,7 +59,8 @@ def viewer():
     else:
         print('')
         for spell in spellbook.values():
-            print(f"{spell['name']} (Level {spell['level']}): {spell['description']}")
+            print(f"{spell['name']} [LEVEL {spell['level']}]")
+            print(spell['description'])
             print('')
 
         time.sleep(1.5)
@@ -64,7 +70,7 @@ def viewer():
 
 def remover(removedspell):
     trueremovedspell = removedspell.title()
-    if spellbook[trueremovedspell]:
+    if trueremovedspell in spellbook:
         spellbook.pop(trueremovedspell)
         print(f"Removed {trueremovedspell} from your spellbook.")
     else:
@@ -84,6 +90,7 @@ def main():
         print('add - Add a spell to your personal spellbook.')
         print('view - Displays your personal spellbook.')
         print('remove - Removes a spell from your spellbook.')
+        print('quit - Quits the menu.')
         rawchoice = input("\nInput a command: ")
 
         choice = rawchoice.lower()
@@ -103,5 +110,8 @@ def main():
             else:
                 removedspell = input('What spell would you like to remove? ')
                 remover(removedspell)
+        elif choice == 'quit':
+            print("Quitting...")
+            quit()
         else:
            invalid()
