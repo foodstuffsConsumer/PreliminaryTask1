@@ -2,82 +2,106 @@ import time
 
 import requests
 
-print(requests.__file__)
-
-print("done")
-
-API_URL = "https://www.dnd5eAPI_URL.co/API_URL/spells/"
+API_URL = "https://www.dnd5eapi.co/api/2014/spells/"
 
 spellbook = {}
 
-def searcher(spell):
-    response = requests.get(API_URL + spell.lower().replace(" ", "-"))
+def searcher(searchedspell):
+    formattedspell = searchedspell.lower().replace(" ", "-") + "/"
+    response = requests.get(API_URL + formattedspell)
+    if response.status_code == 200:
+        spell_data = response.json()
+        print("\n[NAME] - " + spell_data["name"])
+        print("[DESCRIPTION] - " + spell_data["desc"][0])
+        print("[LEVEL] - " + str(spell_data["level"]))
+
+        time.sleep(1.5)
+
+        backtomenu = input('\nInput anything when you would like to return to the Command Menu. ')
+        if backtomenu:
+            return None
+
+    else:
+        print("Spell not found.")
+        time.sleep(1.5)
+
+def finder(spelltofind):
+    formattedspell = spelltofind.lower().replace(" ", "-") + "/"
+    response = requests.get(API_URL + formattedspell)
     if response.status_code == 200:
         spell_data = response.json()
         return {
-            "name": spell_data["name"],
-            "level": spell_data["level"],
-            "description": spell_data["desc"][0]
+            'name': spell_data["name"],
+            'level': spell_data["level"],
+            'description': spell_data["desc"][0]
         }
     else:
         print("Spell not found.")
+        time.sleep(1.5)
         return None
-print('')
 
-def adder(spell):
-    spellname = searcher(spell)
-    if spellname:
-        spellbook[spell] = spellname
-        print(f"Added {spell} to your spellbook!")
-print('')
+def adder(addedspell):
+    trueaddedspell = addedspell.title()
+    if trueaddedspell:
+        spellbook[trueaddedspell] = trueaddedspell
+        print(f"Added {trueaddedspell} to your spellbook!")
+        time.sleep(1.5)
 
 def viewer():
     if not spellbook:
         print("Your spellbook is empty.")
+        time.sleep(1.5)
     else:
+        print('')
         for spell in spellbook.values():
             print(f"{spell['name']} (Level {spell['level']}): {spell['description']}")
-print('')
+            print('')
 
-def remover(spell):
-    if not spellbook:
-        print("Your spellbook is empty.")
+        time.sleep(1.5)
+        backtomenu2 = input('\nInput anything when you would like to return to the Command Menu. ')
+        if backtomenu2:
+            return None
+
+def remover(removedspell):
+    trueremovedspell = removedspell.title()
+    if spellbook[trueremovedspell]:
+        spellbook.pop(trueremovedspell)
+        print(f"Removed {trueremovedspell} from your spellbook.")
     else:
-        if spellbook[spell]:
-            spellbook.pop(spell)
-            print(f"Removed {spell} from your spellbook.")
-        else:
-            print("Spell not found.")
-print('')
+        print("Spell not found.")
+    time.sleep(1.5)
 
 def invalid():
     print("Please type in a valid command.")
-    print('')
+    time.sleep(1.5)
 
 def main():
     while True:
-        print('======================')
+        print('\n======================')
         print('Spellbook Command Menu')
         print('======================')
-        print('')
-        print('search - Search for a spell.')
+        print('\nsearch - Search for a spell.')
         print('add - Add a spell to your personal spellbook.')
         print('view - Displays your personal spellbook.')
         print('remove - Removes a spell from your spellbook.')
-        print('')
-        rawchoice = input("Input a command: ")
+        rawchoice = input("\nInput a command: ")
 
         choice = rawchoice.lower()
 
         if choice == 'search':
-            searcher(choice)
+            searchedspell = input('What spell would you like to search for? ')
+            searcher(searchedspell)
         elif choice == 'add':
-            adder()
+            addedspell = input('What spell would you like to add? ')
+            adder(addedspell)
         elif choice == 'view':
             viewer()
         elif choice == 'remove':
-            remover()
+            if not spellbook:
+                print("Your spellbook is empty.")
+                time.sleep(1.5)
+            else:
+                removedspell = input('What spell would you like to remove? ')
+                remover(removedspell)
         else:
            invalid()
-        
-        time.sleep(1.5)
