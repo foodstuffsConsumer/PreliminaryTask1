@@ -6,24 +6,7 @@ API_URL = "https://www.dnd5eapi.co/api/2014/spells/"
 
 spellbook = {}
 
-def searcher(searchedspell):
-    formattedspell = searchedspell.lower().replace(" ", "-") + "/"
-    response = requests.get(API_URL + formattedspell)
-    if response.status_code == 200:
-        spell_data = response.json()
-        print("\n[NAME] - " + spell_data["name"])
-        print("[LEVEL] - " + str(spell_data["level"]))
-        print("[DESCRIPTION] - " + spell_data["desc"][0])
-        
-        time.sleep(1.5)
-
-        backtomenu = input('\nInput anything when you would like to return to the Command Menu. ')
-        if backtomenu:
-            return None
-
-    else:
-        print("Spell not found.")
-        time.sleep(1.5)
+# every instance of time.sleep(1.5) is to make the program less jarring to use
 
 def finder(spelltofind):
     formattedspell = spelltofind.lower().replace(" ", "-") + "/"
@@ -40,8 +23,27 @@ def finder(spelltofind):
         time.sleep(1.5)
         return None
 
+def searcher(searchedspell):
+    formattedspell = searchedspell.lower().replace(" ", "-") + "/"
+    response = requests.get(API_URL + formattedspell)
+    if response.status_code == 200:
+        spell_data = response.json()
+        print("\n[SPELL] - " + spell_data["name"])
+        print("[LEVEL] - " + str(spell_data["level"]))
+        print("[DESCRIPTION] - " + spell_data["desc"][0])
+        
+        time.sleep(1.5)
+
+        backtomenu = input('\nInput anything when you would like to return to the Command Menu. ')
+        if backtomenu:
+            return None
+
+    else:
+        print("Spell not found.")
+        time.sleep(1.5)
+
 def adder(addedspell):
-    trueaddedspell = addedspell.title()
+    trueaddedspell = addedspell.title() # makes the spell names look good. also makes them not case-sensitive when removing them
     spell = finder(trueaddedspell)
     if spell:
         if trueaddedspell not in spellbook:
@@ -64,8 +66,8 @@ def viewer():
             print('')
 
         time.sleep(1.5)
-        backtomenu2 = input('\nInput anything when you would like to return to the Command Menu. ')
-        if backtomenu2:
+        backtomenu = input('\nInput anything when you would like to return to the Command Menu. ') # used in place of time.sleep() so you get time to read through
+        if backtomenu:
             return None
 
 def remover(removedspell):
@@ -91,27 +93,27 @@ def main():
         print('view - Displays your personal spellbook.')
         print('remove - Removes a spell from your spellbook.')
         print('quit - Quits the menu.')
-        rawchoice = input("\nInput a command: ")
+        rawcommand = input("\nInput a command: ")
 
-        choice = rawchoice.lower()
+        command = rawcommand.lower() # converts user input into lowercase automatically, preventing need for case-sensitivity
 
-        if choice == 'search':
+        if command == 'search':
             searchedspell = input('What spell would you like to search for? ')
             searcher(searchedspell)
-        elif choice == 'add':
+        elif command == 'add':
             addedspell = input('What spell would you like to add? ')
             adder(addedspell)
-        elif choice == 'view':
+        elif command == 'view':
             viewer()
-        elif choice == 'remove':
+        elif command == 'remove':
             if not spellbook:
                 print("Your spellbook is empty.")
                 time.sleep(1.5)
             else:
                 removedspell = input('What spell would you like to remove? ')
                 remover(removedspell)
-        elif choice == 'quit':
+        elif command == 'quit':
             print("Quitting...")
-            quit()
+            quit() # built in function, don't have to define it or get it through a module
         else:
            invalid()
