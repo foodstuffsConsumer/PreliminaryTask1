@@ -18,8 +18,14 @@ def finder(spelltofind):
             'level': spell_data["level"],
             'description': spell_data["desc"][0]
         }
-    else:
+    
+    elif response.status_code == 404: # status code 404 means the spell can't be found
         print("Spell not found.")
+        time.sleep(1.5)
+        return None
+
+    else:
+        print(f"Something went wrong! Error code: {response.status_code}")
         time.sleep(1.5)
         return None
 
@@ -38,8 +44,12 @@ def searcher(searchedspell):
         if backtomenu:
             return None
 
-    else:
+    elif response.status_code == 404:
         print("Spell not found.")
+        time.sleep(1.5)
+
+    else:
+        print(f"Something went wrong! Error code: {response.status_code}")
         time.sleep(1.5)
 
 def adder(addedspell):

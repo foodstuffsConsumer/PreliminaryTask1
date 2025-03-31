@@ -5,16 +5,17 @@
 ## Functional Requirements
 The program's capabilities must include:
 
-- Searching for spells by name or level
-- Storing spells in a spellbook
-- Viewing all your spells in the spellbook
-- Removing unneeded spells from the spellbok
+- Searching for spells by name, and viewing their level and description
+- Storing spells in a spellbook for later viewing or removal
+- Viewing all your spells in the spellbook, including their level and description
+- Removing unneeded spells from the spellbook
 
 ## Non-Functional Requirements
 The program should:
 
 - Be easy to navigate and operate, with a text-based GUI
 - Run consistently and quickly
+- Handle invalid inputs and errors gracefully
 - Be able to recognise commands in both uppercase and lowercase
 
 # Determining Specifications
