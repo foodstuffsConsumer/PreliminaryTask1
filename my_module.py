@@ -6,7 +6,7 @@ API_URL = "https://www.dnd5eapi.co/api/2014/spells/"
 
 spellbook = {}
 
-# every instance of time.sleep(1.5) is to make the program less jarring to use
+# every instance of time.sleep() pauses the program for a certain amount of time and makes the program less jarring to use
 
 def finder(spelltofind):
     formattedspell = spelltofind.lower().replace(" ", "-") + "/"
