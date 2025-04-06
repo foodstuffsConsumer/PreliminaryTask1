@@ -6,9 +6,12 @@ API_URL = "https://www.dnd5eapi.co/api/2014/spells/"
 
 spellbook = {}
 
-# every instance of time.sleep() pauses the program for a certain amount of time and makes the program less jarring to use
+# every instance of time.sleep() pauses the program for a certain amount of time, making the program less jarring to use
 
 def finder(spelltofind):
+
+    """Returns information about a spell for use with the adder() function."""
+
     formattedspell = spelltofind.lower().replace(" ", "-") + "/"
     response = requests.get(API_URL + formattedspell)
     if response.status_code == 200:
@@ -25,11 +28,14 @@ def finder(spelltofind):
         return None
 
     else:
-        print(f"Something went wrong! Error code: {response.status_code}")
+        print(f"Something went wrong with the API! Error code: {response.status_code}")
         time.sleep(1.5)
         return None
 
 def searcher(searchedspell):
+
+    """Prints information about a spell."""
+
     formattedspell = searchedspell.lower().replace(" ", "-") + "/"
     response = requests.get(API_URL + formattedspell)
     if response.status_code == 200:
@@ -39,9 +45,12 @@ def searcher(searchedspell):
         print("[DESCRIPTION] - " + spell_data["desc"][0])
         
         time.sleep(1.5)
-
-        backtomenu = input('\nInput anything when you would like to return to the Command Menu. ')
-        if backtomenu:
+        
+        try:
+            backtomenu = input('\nInput anything when you would like to return to the Command Menu. ')
+            if backtomenu:
+                return None
+        except:
             return None
 
     elif response.status_code == 404:
@@ -53,6 +62,9 @@ def searcher(searchedspell):
         time.sleep(1.5)
 
 def adder(addedspell):
+
+    """Adds a spell into the spellbook with the help of the finder() function."""
+
     trueaddedspell = addedspell.title() # makes the spell names look good. also makes them not case-sensitive when removing them
     spell = finder(trueaddedspell)
     if spell:
@@ -65,6 +77,9 @@ def adder(addedspell):
             time.sleep(1.5)
 
 def viewer():
+
+    """Views all spells currently stored in the spellbook."""
+
     if not spellbook:
         print("Your spellbook is empty.")
         time.sleep(1.5)
@@ -76,11 +91,18 @@ def viewer():
             print('')
 
         time.sleep(1.5)
-        backtomenu = input('\nInput anything when you would like to return to the Command Menu. ') # used in place of time.sleep() so you get time to read through
-        if backtomenu:
+
+        try:
+            backtomenu = input('\nInput anything when you would like to return to the Command Menu. ')
+            if backtomenu:
+                return None
+        except:
             return None
 
 def remover(removedspell):
+    
+    """Removes a spell from the spellbook."""
+
     trueremovedspell = removedspell.title()
     if trueremovedspell in spellbook:
         spellbook.pop(trueremovedspell)
@@ -90,10 +112,16 @@ def remover(removedspell):
     time.sleep(1.5)
 
 def invalid():
+
+    """Prints an error message in case of an invalid command."""
+
     print("Please type in a valid command.")
     time.sleep(1.5)
 
 def main():
+
+    """Creates the interface for the program."""
+
     while True:
         print('\n======================')
         print('Spellbook Command Menu')

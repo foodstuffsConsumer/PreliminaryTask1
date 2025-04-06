@@ -63,7 +63,7 @@ The program should be able to successfully respond to programs under 2 seconds.
 The program should be able to recognise commands in lowercase, uppercase, and a mixture.
 
 ### Reliability
-The program should run programs reliably.
+The program should run programs reliably without encountering frequent errors.
 
 # Design
 
