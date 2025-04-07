@@ -67,4 +67,30 @@ The program should run programs reliably without encountering frequent errors.
 
 # Design
 
-# Development
+# Testing & Debugging
+
+## 10/03/2025
+
+Created and worked on the initial markdown file for documentation, completing Requirements Definition and Determining Specifications. Added an interface to the main.py program, but with no functions yet.
+
+## 17/03/2025
+
+Moved the placeholder code from the interface into functions.
+
+## 19/03/2025
+
+Created actual code for the functions, which should have allowed the user to search, add, view, and remove spells from the spellbook. Encountered an error with the `requests` import not being able to be resolved from source.
+
+## 24/03/2025
+
+Fixed the error, and also fixed a bug with the `viewer()` function, which was meant to display information about all the spells in the spellbook, essentially completing the development phase of the project.
+
+## 25/03/2025
+
+Created a proper README and requirements.txt file.
+
+## 31/03/2025
+
+Added seperate error messages for searching and adding spells; the program will now display different messages from the inputted spell being invalid, or something else being wrong with the API entirely.
+
+# Maintenence

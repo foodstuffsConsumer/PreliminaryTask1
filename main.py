@@ -39,7 +39,7 @@ def main():
         elif command == 'quit':
             print("Quitting...")
             quit() # built in function, don't have to define it or get it through a module
-            
+
         else:
            my_module.invalid()
 
