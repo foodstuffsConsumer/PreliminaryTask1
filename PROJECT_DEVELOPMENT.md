@@ -65,8 +65,6 @@ The program should be able to recognise commands in lowercase, uppercase, and a 
 ### Reliability
 The program should run programs reliably without encountering frequent errors.
 
-# Design
-
 # Testing & Debugging
 
 ## 10/03/2025
@@ -93,4 +91,12 @@ Created a proper README and requirements.txt file.
 
 Added seperate error messages for searching and adding spells; the program will now display different messages from the inputted spell being invalid, or something else being wrong with the API entirely.
 
-# Maintenence
+# Maintenance
+
+The API URL may need tweaking in the future if the link is altered in any way.
+If the program becomes incompatible with newer Python versions for any reason, the code will require further updates.
+If a user finds a bug with the program after deployment,
+- They should send a message regarding the bug with the error message
+- The code in the relevant section will be reviewed and the bug attempted to fix
+- If debugging is completely successful, push the debugged version of the program for public use
+- If debugging is unsuccessful for any reason such as time constraints or otherwise, implement a temporary solution such as graceful error handling and push it
