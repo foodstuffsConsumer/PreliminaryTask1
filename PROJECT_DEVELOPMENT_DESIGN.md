@@ -2,7 +2,11 @@
 
 # GANTT CHART
 
+![](Capture.PNG)
+
 # STRUCTURE CHART
+
+![](<Preliminary Structure Chart.png>)
 
 # DATA DICTIONARY
 
